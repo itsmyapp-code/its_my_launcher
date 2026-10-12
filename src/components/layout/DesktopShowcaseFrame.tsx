@@ -110,12 +110,17 @@ export function DesktopShowcaseFrame() {
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-4">
           {/* Brand */}
           <Link href="/" className="flex items-center space-x-2.5 group">
-            <div className="w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
-              <Smartphone className="w-3.5 h-3.5" />
-            </div>
+            <img
+              src="/logo.png"
+              alt="ItsMyApp Logo"
+              className="w-8 h-8 object-contain drop-shadow group-hover:scale-105 transition-transform"
+            />
             <div className="text-left">
-              <span className="text-sm font-bold tracking-tight text-white">
-                itsmyapp<span className="text-blue-400">.co.uk</span>
+              <span className="text-base font-bold tracking-tight text-white block leading-none">
+                ItsMyApp
+              </span>
+              <span className="text-[10px] text-neutral-400 font-sans block mt-0.5">
+                Innovative Apps for Modern Life
               </span>
             </div>
           </Link>
