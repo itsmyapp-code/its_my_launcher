@@ -8,30 +8,30 @@ import {
 } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "AIzaSyDummyKeyForOfflineFirstClient2026",
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "itsmyapp-co-uk.firebaseapp.com",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "",
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "",
   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "itsmyapp-co-uk",
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || "itsmyapp-co-uk.appspot.com",
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || "100293847561",
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || "1:100293847561:web:d9382f7e41ac82b0",
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || "",
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || "",
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || "",
 };
 
-let app: FirebaseApp;
+let app: FirebaseApp | null = null;
 let db: Firestore | null = null;
 
-if (typeof window !== "undefined") {
-  app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+if (typeof window !== "undefined" && firebaseConfig.apiKey) {
   try {
+    app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
     db = initializeFirestore(app, {
       localCache: persistentLocalCache({
         tabManager: persistentMultipleTabManager(),
       }),
     });
   } catch {
-    db = getFirestore(app);
+    if (app) {
+      db = getFirestore(app);
+    }
   }
-} else {
-  app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 }
 
 export { app, db };
@@ -72,15 +72,15 @@ export async function getUserPreferences(uid: string): Promise<UserPreferences> 
     highContrast: false,
     wallpaper: "gradient-indigo",
     installedAppIds: [
-      "services",
-      "portfolio",
-      "pricing",
-      "booking",
-      "reviews",
-      "about",
-      "gallery",
-      "faq",
-      "contact",
+      "packit-trackit",
+      "time-track-invoice",
+      "bar-gp",
+      "its-my-keys",
+      "its-my-keybox",
+      "its-my-cutlist",
+      "its-my-subs",
+      "win-hub",
+      "its-my-merge",
     ],
     cookieConsent: null,
     lastUpdated: new Date().toISOString(),
